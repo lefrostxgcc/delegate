@@ -42,6 +42,7 @@ dice_delegate_remove(struct ch_dice_delegate **delegate, void (*show)(int, int))
 {
 	struct ch_dice_delegate	*p;
 	struct ch_dice_delegate	*p_prev;
+	struct ch_dice_delegate	*p_next;
 
 	p = *delegate;
 
@@ -50,24 +51,26 @@ dice_delegate_remove(struct ch_dice_delegate **delegate, void (*show)(int, int))
 
 	if (p->show == show)
 	{
-		*delegate = p->next;
+		p_next = p->next;
+		*delegate = p_next;
 		free(p);
+		p = p_next;
 	}
 
 	p_prev = p;
 	while (p != NULL)
 	{
+		p_next = p->next;
 		if (p->show == show)
 		{
-			p_prev->next = p->next;
-			p = p->next;
+			p_prev->next = p_next;
 			free(p);
 		}
 		else
 		{
 			p_prev = p;
-			p = p->next;
 		}
+		p = p_next;
 	}
 }
 
@@ -89,8 +92,33 @@ dice_delegate_destroy(struct ch_dice_delegate **delegate)
 	if (!p)
 		return;
 
-	for (p_next = p->next; p != NULL; p = p_next, p_next = p_next->next)
+	while (p != NULL)
+	{
+		p_next = p->next;
 		free(p);
+		p = p_next;
+		if (p_next)
+			p_next = p_next->next;
+	}
 
 	*delegate = NULL;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
