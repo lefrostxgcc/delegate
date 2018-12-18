@@ -2,7 +2,7 @@
 #include <time.h>
 #include <dice.h>
 
-enum {DICE_MIN = 1, DICE_MAX = 6, DICE_RANGE = DICE_MAX - DICE_MIN};
+enum {DICE_MIN = 1, DICE_MAX = 6, DICE_RANGE = DICE_MAX - DICE_MIN + 1};
 
 struct ch_dice
 {

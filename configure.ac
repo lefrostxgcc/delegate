@@ -22,6 +22,5 @@ PKG_CHECK_MODULES([PKGGTK], [gtk+-3.0])
 
 AC_CONFIG_FILES([Makefile
 				include/Makefile
-				data/Makefile
 				src/Makefile])
 AC_OUTPUT

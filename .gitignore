@@ -5,6 +5,7 @@ configure
 configure.scan
 autoscan.log
 Makefile
+src/resources.c
 *.in
 *.m4
 *~
