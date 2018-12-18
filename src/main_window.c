@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <gtk/gtk.h>
 #include <main_window.h>
 
@@ -6,6 +7,7 @@
 #define				SPACING			10
 
 static void on_button_go_clicked(GtkWidget *button, gpointer data);
+static void	show_on_entry_dice(int a, int b);
 
 static GtkWidget	*entry_dice;
 static GtkWidget	*label_sum;
@@ -52,4 +54,13 @@ GtkWidget *create_main_window(void)
 static void on_button_go_clicked(GtkWidget *button, gpointer data)
 {
 	g_message("Button go clicked!");
+}
+
+static void	show_on_entry_dice(int a, int b)
+{
+	enum {int_bit_count = sizeof(int) * CHAR_BIT};
+	char	buffer[2 * int_bit_count + 4];
+
+	g_snprintf(buffer, sizeof buffer, "%d : %d", a, b);
+	gtk_entry_set_text(GTK_ENTRY(entry_dice), buffer);
 }
