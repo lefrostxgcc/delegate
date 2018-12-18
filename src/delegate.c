@@ -54,12 +54,21 @@ dice_delegate_remove(struct ch_dice_delegate **delegate, void (*show)(int, int))
 		free(p);
 	}
 
-	for (p_prev = p; p != NULL; p_prev = p, p = p->next)
+	p_prev = p;
+	while (p != NULL)
+	{
 		if (p->show == show)
 		{
 			p_prev->next = p->next;
+			p = p->next;
 			free(p);
 		}
+		else
+		{
+			p_prev = p;
+			p = p->next;
+		}
+	}
 }
 
 void
