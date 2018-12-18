@@ -1,0 +1,11 @@
+build-aux/
+debug/
+autom4te.cache/
+configure
+configure.scan
+autoscan.log
+Makefile
+*.in
+*.m4
+*~
+*.o
