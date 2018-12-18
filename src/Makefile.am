@@ -1,5 +1,5 @@
 bin_PROGRAMS = delegate
-delegate_SOURCES = main.c main_window.c dice.c resources.c
+delegate_SOURCES = main.c main_window.c dice.c delegate.c resources.c
 delegate_CFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/data		\
 					$(PKGGTK_CFLAGS) $(AM_CFLAGS)
 delegate_LDADD = $(PKGGTK_LIBS)
