@@ -17,6 +17,7 @@ struct ch_dice*		dice_create(void (*show_delegate)(int, int))
 {
 	struct ch_dice	*dice;
 
+	srand(time(NULL));
 	dice = (struct ch_dice *) malloc(sizeof(struct ch_dice));
 	dice->show = show_delegate;
 	return dice;
@@ -24,7 +25,6 @@ struct ch_dice*		dice_create(void (*show_delegate)(int, int))
 
 void				dice_go(struct ch_dice *dice)
 {
-	srand(time(NULL));
 	dice->a = random_dice();
 	dice->b = random_dice();
 	dice->show(dice->a, dice->b);
