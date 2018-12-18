@@ -1,6 +1,8 @@
 #include <limits.h>
 #include <gtk/gtk.h>
 #include <main_window.h>
+#include <delegate.h>
+#include <dice.h>
 
 #define				WINDOW_TITLE	"Игральные кубики"
 #define				BUTTON_LABEL	"Бросить кубики"
@@ -12,10 +14,12 @@ static void	show_on_label_sum(int a, int b);
 static void	show_on_images(int a, int b);
 static const char *image_path(int a);
 
-static GtkWidget		*entry_dice;
-static GtkWidget		*label_sum;
-static GtkWidget		*image_left;
-static GtkWidget		*image_right;
+static GtkWidget				*entry_dice;
+static GtkWidget				*label_sum;
+static GtkWidget				*image_left;
+static GtkWidget				*image_right;
+static struct ch_dice			*dice;
+static struct ch_dice_delegate	*dice_delegate;
 
 GtkWidget		*create_main_window(void)
 {
@@ -24,6 +28,11 @@ GtkWidget		*create_main_window(void)
 	GtkWidget		*hbox;
 	GtkWidget		*frame_label;
 	GtkWidget		*button_go;
+
+	dice_delegate = dice_delegate_create(show_on_entry_dice);
+	dice_delegate_add(&dice_delegate, show_on_label_sum);
+	dice_delegate_add(&dice_delegate, show_on_images);
+	dice = dice_create(dice_delegate);
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), WINDOW_TITLE);
@@ -57,6 +66,7 @@ GtkWidget		*create_main_window(void)
 
 static void		on_button_go_clicked(GtkWidget *button, gpointer data)
 {
+	dice_go(dice);
 }
 
 static void		show_on_entry_dice(int a, int b)
