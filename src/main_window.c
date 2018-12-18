@@ -8,11 +8,12 @@
 
 static void on_button_go_clicked(GtkWidget *button, gpointer data);
 static void	show_on_entry_dice(int a, int b);
+static void	show_on_label_sum(int a, int b);
 
-static GtkWidget	*entry_dice;
-static GtkWidget	*label_sum;
-static GtkWidget	*image_left;
-static GtkWidget	*image_right;
+static GtkWidget		*entry_dice;
+static GtkWidget		*label_sum;
+static GtkWidget		*image_left;
+static GtkWidget		*image_right;
 
 GtkWidget *create_main_window(void)
 {
@@ -54,7 +55,6 @@ GtkWidget *create_main_window(void)
 
 static void on_button_go_clicked(GtkWidget *button, gpointer data)
 {
-	g_message("Button go clicked!");
 }
 
 static void	show_on_entry_dice(int a, int b)
@@ -64,4 +64,13 @@ static void	show_on_entry_dice(int a, int b)
 
 	g_snprintf(buffer, sizeof buffer, "%d : %d", a, b);
 	gtk_entry_set_text(GTK_ENTRY(entry_dice), buffer);
+}
+
+static void	show_on_label_sum(int a, int b)
+{
+	enum {int_bit_count = sizeof(int) * CHAR_BIT};
+	char	buffer[int_bit_count + 1];
+
+	g_snprintf(buffer, sizeof buffer, "%d", a + b);
+	gtk_label_set_text(GTK_LABEL(label_sum), buffer);
 }
