@@ -33,7 +33,7 @@ dice_delegate_add(struct ch_dice_delegate **delegate, void (*show)(int, int))
 	{
 		for (p = *delegate; p->next != NULL; p = p->next)
 			;
-		p = node;
+		p->next = node;
 	}
 }
 
