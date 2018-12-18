@@ -9,13 +9,15 @@
 static void on_button_go_clicked(GtkWidget *button, gpointer data);
 static void	show_on_entry_dice(int a, int b);
 static void	show_on_label_sum(int a, int b);
+static void	show_on_images(int a, int b);
+static const char *image_path(int a);
 
 static GtkWidget		*entry_dice;
 static GtkWidget		*label_sum;
 static GtkWidget		*image_left;
 static GtkWidget		*image_right;
 
-GtkWidget *create_main_window(void)
+GtkWidget		*create_main_window(void)
 {
 	GtkWidget		*window;
 	GtkWidget		*vbox;
@@ -53,11 +55,11 @@ GtkWidget *create_main_window(void)
 	return window;
 }
 
-static void on_button_go_clicked(GtkWidget *button, gpointer data)
+static void		on_button_go_clicked(GtkWidget *button, gpointer data)
 {
 }
 
-static void	show_on_entry_dice(int a, int b)
+static void		show_on_entry_dice(int a, int b)
 {
 	enum {int_bit_count = sizeof(int) * CHAR_BIT};
 	char	buffer[2 * int_bit_count + 4];
@@ -66,11 +68,31 @@ static void	show_on_entry_dice(int a, int b)
 	gtk_entry_set_text(GTK_ENTRY(entry_dice), buffer);
 }
 
-static void	show_on_label_sum(int a, int b)
+static void		show_on_label_sum(int a, int b)
 {
 	enum {int_bit_count = sizeof(int) * CHAR_BIT};
 	char	buffer[int_bit_count + 1];
 
 	g_snprintf(buffer, sizeof buffer, "%d", a + b);
 	gtk_label_set_text(GTK_LABEL(label_sum), buffer);
+}
+
+static void		show_on_images(int a, int b)
+{
+	gtk_image_set_from_resource(GTK_IMAGE(image_left), image_path(a));
+	gtk_image_set_from_resource(GTK_IMAGE(image_right), image_path(b));
+}
+
+static const char *image_path(int a)
+{
+	switch (a)
+	{
+		case 1:	return "/images/1.png";
+		case 2:	return "/images/2.png";
+		case 3:	return "/images/3.png";
+		case 4:	return "/images/4.png";
+		case 5:	return "/images/5.png";
+		case 6:	return "/images/6.png";
+	}
+	return NULL;
 }
