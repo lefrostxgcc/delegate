@@ -32,6 +32,7 @@ GtkWidget *create_main_window(void)
 	button_go = gtk_button_new_with_label(BUTTON_LABEL);
 
 	gtk_widget_set_sensitive(entry_dice, FALSE);
+	gtk_entry_set_alignment(GTK_ENTRY(entry_dice), 0.5);
 	gtk_container_set_border_width(GTK_CONTAINER(window), SPACING);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, SPACING);
