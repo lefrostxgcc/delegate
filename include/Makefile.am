@@ -1,1 +1,1 @@
-EXTRA_DIST=main_window.h
+EXTRA_DIST = dice.h main_window.h
